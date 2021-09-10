@@ -102,10 +102,10 @@ forward()
 while True:
     color = green      # Assume the way ahead is clear
     distance = ping()  # Check the distance
-    if distance < 4:   # Obstruction ahead, slow down
+    if distance < 5:   # Obstruction ahead, slow down
         color = yellow
         forwardSlow()
-    if distance < 2:   # Obstruction too close, stop, and play tone
+    if distance < 2.5: # Obstruction too close, stop, and play tone
         color = red
         stop()
         playTone()
