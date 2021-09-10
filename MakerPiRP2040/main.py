@@ -82,7 +82,7 @@ def stop():
     left_reverse.duty_u16(0)
 
 def reverseAndTurn():
-    utime.sleep(.25)
+    utime.sleep(.5)
     right_reverse.duty_u16(FULL_POWER_LEVEL // 4)
     left_reverse.duty_u16(FULL_POWER_LEVEL // 4)
     utime.sleep(1.5)
@@ -110,6 +110,5 @@ while True:
         stop()
         playTone()
     showColor(color)
-    utime.sleep(.25)
     if color == red:  # If we stopped, back up and turn
         reverseAndTurn()
