@@ -1,5 +1,7 @@
 # samsung.py Decoder for IR remote control using synchronous code
 # Supports Samsung TV remote protocols.
+# Code depends on base class code found here:
+#   https://github.com/peterhinch/micropython_ir/tree/master/ir_rx
 
 # Author: J.E. Tannenbaum
 # Copyright J.E.Tannenbaum 2021 Released under the MIT license
