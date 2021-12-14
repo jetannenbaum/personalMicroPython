@@ -7,15 +7,14 @@
 from utime import ticks_us, ticks_diff
 from ir_rx import IR_RX
 
-class SAMSUNG_IR(IR_RX):
+class SAMSUNG(IR_RX):
     def __init__(self, pin, callback, *args):
         super().__init__(pin, 68, 80, callback, *args)
-        self.data = none
 
     def decode(self, _):
         def near(v, target):
             return target * 0.8 < v < target * 1.2
-        
+
         lb = self.edge - 1  # Possible length of burst
         burst = []
         for x in range(lb):
@@ -23,15 +22,16 @@ class SAMSUNG_IR(IR_RX):
             if x > 0 and dt > 10000:  # Reached gap between repeats
                 break
             burst.append(dt)
-        
-        lb = len(burst)  # Actual length
 
+        lb = len(burst)  # Actual length
         cmd = 0
         if near(burst[0], 4500) and near(burst[1], 4500) and lb == 67:
-            for x in rang(2, lb - 1, 2):
+            # Skip the starting bit and the checksum at the end of the sequence
+            for x in range(2, lb - 1, 2):
                 cmd *= 2
-                if burst[x] > 1000 and burst[x + 1} < 1000]:
+                # Test for logical 1 (One byte low, next byte high)
+                if burst[x] < 1000 and burst[x + 1] > 1000:
                     cmd += 1
 
         # Set up for new data burst and run user callback
-        self.do_callback(hex(cmd), 0, 0)
+        self.do_callback(cmd, 0, 0)
