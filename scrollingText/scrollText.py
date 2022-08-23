@@ -12,10 +12,6 @@ ROWS           = 8  # Each display has 8 pixels
 COLS           = 8  # There are 8 neopixel modules
 strips         = [] # a list of neopixel strips
 
-
-for neopixel_pin in NEOPIXEL_PINS:
-    strips.append(NeoPixel(Pin(neopixel_pin), ROWS))
-
 def write_pixel_value(x, y, value):
     if y >= 0 and y < ROWS and x >=0 and x < COLS:
         strips[x][ROWS - 1 - y] = value
@@ -57,5 +53,8 @@ def scroll_text(message):
             
             # Update the pixels.
             show()
+            
+for neopixel_pin in NEOPIXEL_PINS:
+    strips.append(NeoPixel(Pin(neopixel_pin), ROWS))
 
 scroll_text('MicroPython Rocks!')
