@@ -43,8 +43,8 @@ def readUart(uart, delay):
         sleep(delay)
  
 # Create the UARTs
-uart0 = UART(i0, baudrate=115200, tx=Pin(0), rx=Pin(1))
-uart1 = UART(i1, baudrate=9600, tx=Pin(4), rx=Pin(5))
+uart0 = UART(0, baudrate=115200, tx=Pin(0), rx=Pin(1))
+uart1 = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
 
 # Print a command line
 print("-"*50)
